@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rock Paper Scissors Game </title>
+</head>
+
+<body>
+    <script>
+        function computerPlay () {
+            //Create a variable that generates random number from 0 to 2.
+            const random = Math.floor(Math.random() * 3);
+            //Create a variable that will the computer choice.
+            let computerChoice = '';
+            //Assign a either rock, paper, or scissors dependeing on the number.
+            if (random == 0) {
+                computerChoice = 'ROCK';
+            } else if (random == 1) {
+                computerChoice = 'PAPER';
+            } else {
+                computerChoice = 'SCISSORS'
+            }
+            //return that number.
+            return computerChoice;
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            //Make a winning delcaration variable.
+            const playerWon = `You Win! ${playerSelection} beats ${computerSelection}`;
+            //MAke a loosing declaration variable.
+            const playerLost = `You Lose! ${computerSelection} beats ${playerSelection}`;                //MAke a tie delcaration variable.
+            const tie = `It's a Tie!`
+            //Check that player selection is rock, paper or scissors.
+            //Checks who won:
+            //if playerSelection is rock:
+            //it looses against paper. Declare the loosing and add score.
+            if (playerSelection === 'ROCK' && computerSelection === 'PAPER') {                    pcScore += 1;
+                return playerLost;
+                //wins agains scissors. Declare the winner and add score.
+            } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') {
+                userScore += 1;
+                return playerWon;
+            } else {
+                 return tie;
+            }
+            //if playerSelection is paper: 
+            //looses agains scissors. Declare the loosing and add score.
+            if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') {
+                pcScore += 1;
+                return playerLost;
+                //wins agains rock. Declare the winner and add score.
+            } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK') {
+                userScore += 1;
+                return playerWon;
+            } else {
+                return tie;
+            }
+            //if playerSelection is scissors:
+            //looses agains rock Declare the loosing and add score.
+            if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') {
+                pcScore += 1;
+                return playerLost;                    //wins agains paper. Declare the winner and add score
+            } else if (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') {
+                userScore += 1;
+                return playerWon;
+            } else {
+                return tie;
+            }
+        } 
+
+        function game () {
+            //Make the game play for the best of 5 rounds.
+            let computerSelection;
+            while (userScore + pcScore < 5) {
+                //Get user Input.
+                getInput();
+                while (playerSelection === ''){
+                    getInput();
+                }
+                //Get computer Selection.
+                computerSelection = computerPlay();
+                //Make it play 1 round and log it.
+                console.log (playRound(playerSelection, computerSelection));
+                //Log the score.
+                console.log(`The score is: ${userScore} vs ${pcScore}.`)
+            }
+            //Check who has the highest score.
+            if (userScore > pcScore) {
+            //Make a wiining statement when the rounds are over.
+                console.log(`You won with a score of: ${userScore} vs ${pcScore}.`);
+            } else {
+                //Make a loosing statement.
+                console.log(`You lost with a score of: ${userScore} vs ${pcScore}.`);
+            }
+            
+        }
+
+        //Make 2 variable to hold score, one for user, one for pc.
+        let userScore = 0;
+        let pcScore = 0;
+
+        //Get input from User.
+        //Declare a function.
+        function getInput () {
+            const playerInput = window.prompt(`Choose either Rock, Paper or Scissors.`);
+            //Get the input from the user.
+            //Make it lower letter.
+            const playerSelectionToUpper = playerInput.toUpperCase();
+            //Check if it either rock, paper, or scissors.
+            if (playerSelectionToUpper === 'ROCK' || playerSelectionToUpper === 'PAPER' || playerSelectionToUpper === 'SCISSORS') {
+                //if it is change playerSelection.
+                playerSelection = playerSelectionToUpper;
+            } else {
+                //if it isn't ask to write rock, paper or scissors until is done.
+                playerSelection = '';
+            }
+        }
+       
+        let playerSelection = '';
+
+    </script>
+</body>
+
+</html>
